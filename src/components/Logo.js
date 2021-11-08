@@ -5,8 +5,10 @@ export const Logo = ({ sx }) => {
   return (
     <Box
       component="img"
-      src="/static/logo.svg"
-      sx={{ width: 40, height: 40, ...sx }}
+      display="flex"
+      justifyContent="center"
+      src="/static/logo.jpg"
+      sx={{ width: 60, height: 40, ...sx }}
     />
   );
 };

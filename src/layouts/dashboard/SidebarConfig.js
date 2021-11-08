@@ -1,10 +1,7 @@
 import {
-  AddAlertOutlined,
-  AddTaskOutlined,
-  AppBlockingOutlined,
   CalendarTodayOutlined,
   DashboardOutlined,
-  LockOutlined,
+  NewReleasesOutlined,
   PeopleOutlined,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
@@ -33,22 +30,7 @@ const sidebarConfig = [
   {
     title: "blog",
     path: "/dashboard/blog",
-    icon: <AppBlockingOutlined />,
-  },
-  {
-    title: "connexion",
-    path: "/login",
-    icon: <LockOutlined />,
-  },
-  {
-    title: "deconnexion",
-    path: "/register",
-    icon: <AddTaskOutlined />,
-  },
-  {
-    title: "Erreur 404",
-    path: "/404",
-    icon: <AddAlertOutlined />,
+    icon: <NewReleasesOutlined />,
   },
 ];
 

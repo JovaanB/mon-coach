@@ -52,10 +52,7 @@ export const Register = () => {
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
             Gérez le travail plus efficacement avec <strong>Mon Coach</strong>
           </Typography>
-          <img
-            alt="register"
-            src="/static/illustrations/illustration_register.png"
-          />
+          <img alt="register" src="/static/illustrations/junior_soccer.svg" />
         </SectionStyle>
       </MHidden>
 

@@ -96,7 +96,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
         >
           <Box
             component="img"
-            src="/static/illustrations/illustration_avatar.png"
+            src="/static/illustrations/profile_pic.svg"
             sx={{ width: 100, position: "absolute", top: -50 }}
           />
 

@@ -10,9 +10,9 @@ import POSTS from "../_mocks_/blog";
 import { PlusOneOutlined } from "@mui/icons-material";
 
 const SORT_OPTIONS = [
-  { value: "latest", label: "Latest" },
-  { value: "popular", label: "Popular" },
-  { value: "oldest", label: "Oldest" },
+  { value: "latest", label: "Récents" },
+  { value: "popular", label: "Populaire" },
+  { value: "oldest", label: "Anciens" },
 ];
 
 export const Blog = () => {
@@ -34,7 +34,7 @@ export const Blog = () => {
             to="#"
             startIcon={<PlusOneOutlined />}
           >
-            New Post
+            Nouvel article
           </Button>
         </Stack>
 

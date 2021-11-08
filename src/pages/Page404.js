@@ -24,9 +24,8 @@ export const NotFound = () => {
               </Typography>
             </div>
             <Typography sx={{ color: "text.secondary" }}>
-              Désolé, nous n'avons pas pu trouver la page que vous recherchez.
-              Peut-être que vous avez mal saisi l'URL ? Vérifiez votre
-              orthographe.
+              Désolé, nous n'avons pas pu trouver la page que tu recherches.
+              As-tu mal saisi l'URL ? Vérifies ton orthographe.
             </Typography>
 
             <div>
