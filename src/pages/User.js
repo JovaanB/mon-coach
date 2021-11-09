@@ -1,5 +1,4 @@
 import { filter } from "lodash";
-import { sentenceCase } from "change-case";
 import { useState } from "react";
 import { Link as RouterLink } from "react-router-dom";
 import {
@@ -32,10 +31,10 @@ import { PlusOneOutlined } from "@mui/icons-material";
 
 const TABLE_HEAD = [
   { id: "name", label: "Nom", alignRight: false },
-  { id: "company", label: "Entreprise", alignRight: false },
+  { id: "email", label: "Email", alignRight: false },
   { id: "role", label: "Rôle", alignRight: false },
   { id: "isVerified", label: "Vérifié", alignRight: false },
-  { id: "status", label: "Statut", alignRight: false },
+  { id: "status", label: "Objectif", alignRight: false },
   { id: "" },
 ];
 
@@ -186,7 +185,7 @@ export const User = () => {
                         name,
                         role,
                         status,
-                        company,
+                        email,
                         avatarUrl,
                         isVerified,
                       } = row;
@@ -195,8 +194,11 @@ export const User = () => {
                       return (
                         <TableRow
                           hover
+                          component={RouterLink}
+                          to={`/dashboard/user/${id}/`}
                           key={id}
                           tabIndex={-1}
+                          style={{ textDecoration: "none" }}
                           role="checkbox"
                           selected={isItemSelected}
                           aria-checked={isItemSelected}
@@ -219,19 +221,25 @@ export const User = () => {
                               </Typography>
                             </Stack>
                           </TableCell>
-                          <TableCell align="left">{company}</TableCell>
+                          <TableCell align="left">{email}</TableCell>
                           <TableCell align="left">{role}</TableCell>
                           <TableCell align="left">
-                            {isVerified ? "Yes" : "No"}
+                            {isVerified ? "Oui" : "Non"}
                           </TableCell>
                           <TableCell align="left">
                             <Label
                               variant="ghost"
                               color={
-                                (status === "banned" && "error") || "success"
+                                status === "PDM"
+                                  ? "success"
+                                  : status === "Perf"
+                                  ? "info"
+                                  : status === "Seche"
+                                  ? "warning"
+                                  : "error"
                               }
                             >
-                              {sentenceCase(status)}
+                              {status.toUpperCase()}
                             </Label>
                           </TableCell>
 

@@ -1,7 +1,7 @@
 import {
+  ArticleOutlined,
   CalendarTodayOutlined,
   DashboardOutlined,
-  NewReleasesOutlined,
   PeopleOutlined,
   ShoppingBagOutlined,
 } from "@mui/icons-material";
@@ -30,7 +30,7 @@ const sidebarConfig = [
   {
     title: "blog",
     path: "/dashboard/blog",
-    icon: <NewReleasesOutlined />,
+    icon: <ArticleOutlined />,
   },
 ];
 

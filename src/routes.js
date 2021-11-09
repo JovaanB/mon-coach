@@ -9,6 +9,7 @@ import { Planning } from "./pages/Planning";
 import { Blog } from "./pages/Blog";
 import { User } from "./pages/User";
 import { NotFound } from "./pages/Page404";
+import { OneUser } from "./pages/OneUser";
 
 export const Router = () => {
   return useRoutes([
@@ -20,6 +21,7 @@ export const Router = () => {
         { path: "app", element: <DashboardApp /> },
         { path: "planning", element: <Planning /> },
         { path: "user", element: <User /> },
+        { path: "user/:id", element: <OneUser /> },
         { path: "products", element: <Products /> },
         { path: "blog", element: <Blog /> },
       ],

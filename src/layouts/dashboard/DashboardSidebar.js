@@ -110,12 +110,13 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
           </Box>
 
           <Button
+            style={{ textTransform: "inherit" }}
             fullWidth
             href="https://material-ui.com/store/items/minimal-dashboard/"
             target="_blank"
             variant="contained"
           >
-            Passes à la version Pro
+            Passer à la version Pro
           </Button>
         </Stack>
       </Box>
