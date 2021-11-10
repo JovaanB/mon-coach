@@ -34,7 +34,7 @@ const TABLE_HEAD = [
   { id: "email", label: "Email", alignRight: false },
   { id: "role", label: "Rôle", alignRight: false },
   { id: "isVerified", label: "Vérifié", alignRight: false },
-  { id: "status", label: "Objectif", alignRight: false },
+  { id: "goal", label: "Objectif", alignRight: false },
   { id: "" },
 ];
 
@@ -184,7 +184,7 @@ export const User = () => {
                         id,
                         name,
                         role,
-                        status,
+                        goal,
                         email,
                         avatarUrl,
                         isVerified,
@@ -230,16 +230,16 @@ export const User = () => {
                             <Label
                               variant="ghost"
                               color={
-                                status === "PDM"
+                                goal === "PDM"
                                   ? "success"
-                                  : status === "Perf"
+                                  : goal === "Perf"
                                   ? "info"
-                                  : status === "Seche"
+                                  : goal === "Seche"
                                   ? "warning"
                                   : "error"
                               }
                             >
-                              {status.toUpperCase()}
+                              {goal.toUpperCase()}
                             </Label>
                           </TableCell>
 

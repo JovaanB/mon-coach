@@ -47,7 +47,7 @@ export const UserListToolbar = ({ numSelected, filterName, onFilterName }) => {
     >
       {numSelected > 0 ? (
         <Typography component="div" variant="subtitle1">
-          {numSelected} selected
+          {numSelected} selectionnés
         </Typography>
       ) : (
         <SearchStyle

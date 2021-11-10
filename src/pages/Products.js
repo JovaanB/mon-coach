@@ -45,7 +45,7 @@ export const Products = () => {
     <Page title="Dashboard: Produits | Mon Coach">
       <Container>
         <Typography variant="h4" sx={{ mb: 5 }}>
-          Products
+          Produits
         </Typography>
 
         <Stack
