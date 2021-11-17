@@ -80,7 +80,7 @@ export const AppNewsUpdate = () => {
           component={RouterLink}
           endIcon={<ArrowForwardIosOutlined />}
         >
-          View all
+          Voir tout
         </Button>
       </Box>
     </Card>
