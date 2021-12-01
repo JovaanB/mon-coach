@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Stack, Button } from "@mui/material";
+import { PersonAdd } from "@mui/icons-material";
 
 export const InviteAthlete = () => {
   return (
@@ -17,6 +18,7 @@ export const InviteAthlete = () => {
         <Button
           style={{ textTransform: "inherit" }}
           fullWidth
+          startIcon={<PersonAdd />}
           href="https://material-ui.com/store/items/minimal-dashboard/"
           target="_blank"
           variant="contained"
