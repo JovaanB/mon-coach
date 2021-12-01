@@ -3,9 +3,6 @@ import {
   Container,
   Typography,
   Grid,
-  Card,
-  CardHeader,
-  CardContent,
   Avatar,
   Alert,
   Chip,
@@ -29,13 +26,14 @@ import {
   HeightOutlined,
   Instagram,
   LinkedIn,
-  ModeEditOutlined,
   MonitorWeightOutlined,
   PhoneCallbackOutlined,
   TrackChangesOutlined,
   Twitter,
 } from "@mui/icons-material";
+import { CustomCard } from "../components/CustomCard";
 import { VMACard } from "../components/_oneUser/VMACard/VMACard";
+import { MaximumLoadCard } from "../components/_oneUser/MaximumLoadCard/MaximumLoadCard";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -145,128 +143,112 @@ export const OneUser = () => {
         <Container maxWidth="xl">
           <Grid container spacing={2}>
             <Grid item xs={12} sm={6} md={6}>
-              <Card style={{ height: "100%" }}>
-                <CardHeader
-                  title="Informations"
-                  action={<ModeEditOutlined />}
-                />
-                <CardContent>
-                  <Box
-                    marginBottom={3}
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                  >
-                    <Avatar
-                      alt={user?.name}
-                      src={user?.avatarUrl}
-                      sx={{ width: 56, height: 56, marginX: 3 }}
-                    />
+              <CustomCard title="Informations" style={{ height: "100%" }}>
+                <Box
+                  marginBottom={3}
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                >
+                  <Avatar
+                    alt={user?.name}
+                    src={user?.avatarUrl}
+                    sx={{ width: 56, height: 56, marginX: 3 }}
+                  />
 
-                    <Typography variant="h6">
-                      {user?.name} | {user?.age} ans
-                    </Typography>
-                  </Box>
-                  <Box
-                    display="flex"
-                    justifyContent="flex-start"
-                    gap={2}
-                    marginBottom={2}
-                  >
-                    <MonitorWeightOutlined /> <b>{user?.weight} KG</b>
-                    <HeightOutlined /> <b>{user?.height} CM</b>
-                  </Box>
-                  <Alert severity="info">
-                    Son <b>IMC</b> est de <b>{calculIMC(user)}</b> | Poids idéal{" "}
-                    <b>{calculIdealWeight(user)}</b> KG
-                  </Alert>
-                  <Typography variant="h5" marginY={2}>
-                    Contact
+                  <Typography variant="h6">
+                    {user?.name} | {user?.age} ans
                   </Typography>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                    gap={2}
-                    marginBottom={1}
-                  >
-                    <EmailOutlined /> <span>{user?.email}</span>
-                  </Box>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                    gap={2}
-                    marginBottom={1}
-                  >
-                    <PhoneCallbackOutlined /> <span>07 88 96 25 20</span>
-                  </Box>
-                  <Box
-                    display="flex"
-                    alignItems="center"
-                    justifyContent="flex-start"
-                    gap={2}
-                    marginBottom={1}
-                  >
-                    <FacebookOutlined />
-                    <Instagram />
-                    <Twitter />
-                    <LinkedIn />
-                  </Box>
-                </CardContent>
-              </Card>
+                </Box>
+                <Box
+                  display="flex"
+                  justifyContent="flex-start"
+                  gap={2}
+                  marginBottom={2}
+                >
+                  <MonitorWeightOutlined /> <b>{user?.weight} KG</b>
+                  <HeightOutlined /> <b>{user?.height} CM</b>
+                </Box>
+                <Alert severity="info">
+                  Son <b>IMC</b> est de <b>{calculIMC(user)}</b> | Poids idéal{" "}
+                  <b>{calculIdealWeight(user)}</b> KG
+                </Alert>
+                <Typography variant="h5" marginY={2}>
+                  Contact
+                </Typography>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  gap={2}
+                  marginBottom={1}
+                >
+                  <EmailOutlined /> <span>{user?.email}</span>
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  gap={2}
+                  marginBottom={1}
+                >
+                  <PhoneCallbackOutlined /> <span>07 88 96 25 20</span>
+                </Box>
+                <Box
+                  display="flex"
+                  alignItems="center"
+                  justifyContent="flex-start"
+                  gap={2}
+                  marginBottom={1}
+                >
+                  <FacebookOutlined />
+                  <Instagram />
+                  <Twitter />
+                  <LinkedIn />
+                </Box>
+              </CustomCard>
             </Grid>
             <Grid item xs={12} sm={6} md={6}>
-              <Card>
-                <CardHeader
-                  title="Alimentation"
-                  action={<ModeEditOutlined />}
-                />
-                <CardContent>
-                  <Box
-                    display="flex"
-                    justifyContent="flex-start"
-                    alignItems="center"
-                    gap={2}
-                    marginBottom={2}
-                  >
-                    <TrackChangesOutlined />{" "}
-                    <Chip
-                      label={user?.goal}
-                      color="primary"
-                      variant="outlined"
-                    />
-                    | Sédentaire
-                  </Box>
-                  <Alert severity="success">
-                    Son <b>BMR</b> (Métabolisme de base) en fonction de son
-                    niveau activité est de
-                  </Alert>
-                  <TableContainer component={Paper}>
-                    <Table padding="normal" aria-label="simple table">
-                      <TableHead>
-                        <TableRow alignItems="right">
-                          <TableCell>Niveau d'activité</TableCell>
-                          <TableCell>Besoin quotidien (kcal.)</TableCell>
+              <CustomCard title="Alimentation">
+                <Box
+                  display="flex"
+                  justifyContent="flex-start"
+                  alignItems="center"
+                  gap={2}
+                  marginBottom={2}
+                >
+                  <TrackChangesOutlined />{" "}
+                  <Chip label={user?.goal} color="primary" variant="outlined" />
+                  | Extrêmement actif
+                </Box>
+                <Alert severity="success">
+                  Son <b>BMR</b> (Métabolisme de base) en fonction de son niveau
+                  activité est de
+                </Alert>
+                <TableContainer component={Paper}>
+                  <Table padding="normal" aria-label="simple table">
+                    <TableHead>
+                      <TableRow alignItems="right">
+                        <TableCell>Niveau d'activité</TableCell>
+                        <TableCell>Besoin quotidien (kcal.)</TableCell>
+                      </TableRow>
+                    </TableHead>
+                    <TableBody>
+                      {calculMacros(user).map((row) => (
+                        <TableRow
+                          selected={row.id === user.activityId}
+                          key={row.description}
+                        >
+                          <TableCell component="th" scope="row">
+                            {row.description}
+                          </TableCell>
+                          <TableCell>{row.value}</TableCell>
                         </TableRow>
-                      </TableHead>
-                      <TableBody>
-                        {calculMacros(user).map((row) => (
-                          <TableRow
-                            selected={row.id === user.activityId}
-                            key={row.description}
-                          >
-                            <TableCell component="th" scope="row">
-                              {row.description}
-                            </TableCell>
-                            <TableCell>{row.value}</TableCell>
-                          </TableRow>
-                        ))}
-                      </TableBody>
-                    </Table>
-                  </TableContainer>
-                </CardContent>
-              </Card>
+                      ))}
+                    </TableBody>
+                  </Table>
+                </TableContainer>
+              </CustomCard>
             </Grid>
             <Grid item xs={12} sm={12} md={12}>
               <Box
@@ -293,7 +275,9 @@ export const OneUser = () => {
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
-              Musculation
+              <Grid item>
+                <MaximumLoadCard user={user} />
+              </Grid>
             </TabPanel>
             <TabPanel value={value} index={2}>
               Autres

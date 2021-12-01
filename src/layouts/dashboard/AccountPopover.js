@@ -1,5 +1,5 @@
 import { useRef, useState } from "react";
-import { Link as RouterLink } from "react-router-dom";
+import { Link as RouterLink, useNavigate } from "react-router-dom";
 import { alpha } from "@mui/material/styles";
 import {
   Button,
@@ -16,7 +16,7 @@ import {
   SettingsOutlined,
 } from "@mui/icons-material";
 import { MenuPopover } from "../../components/MenuPopover";
-import account from "../../_mocks_/account";
+import AuthService from "../../services/auth.service";
 
 const MENU_OPTIONS = [
   {
@@ -38,13 +38,20 @@ const MENU_OPTIONS = [
 
 export const AccountPopover = () => {
   const anchorRef = useRef(null);
+  const navigate = useNavigate();
   const [open, setOpen] = useState(false);
+  const { firstname, lastname, email } = AuthService.getCurrent();
 
   const handleOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
+  };
+
+  const onLogout = () => {
+    AuthService.logout();
+    navigate("/login", { replace: true });
   };
 
   return (
@@ -69,7 +76,10 @@ export const AccountPopover = () => {
           }),
         }}
       >
-        <Avatar src={account.photoURL} alt="photoURL" />
+        <Avatar
+          src="/static/mock-images/avatars/avatar_default.svg"
+          alt="photoURL"
+        />
       </IconButton>
 
       <MenuPopover
@@ -80,10 +90,10 @@ export const AccountPopover = () => {
       >
         <Box sx={{ my: 1.5, px: 2.5 }}>
           <Typography variant="subtitle1" noWrap>
-            {account.displayName}
+            {firstname} {lastname}
           </Typography>
           <Typography variant="body2" sx={{ color: "text.secondary" }} noWrap>
-            {account.email}
+            {email}
           </Typography>
         </Box>
 
@@ -111,7 +121,7 @@ export const AccountPopover = () => {
         ))}
 
         <Box sx={{ p: 2, pt: 1.5 }}>
-          <Button fullWidth color="error" variant="outlined">
+          <Button onClick={onLogout} fullWidth color="error" variant="outlined">
             Déconnexion
           </Button>
         </Box>

@@ -50,7 +50,7 @@ export const Register = () => {
       <MHidden width="mdDown">
         <SectionStyle>
           <Typography variant="h3" sx={{ px: 5, mt: 10, mb: 5 }}>
-            Gérez le travail plus efficacement avec <strong>Mon Coach</strong>
+            Gérez vos clients plus efficacement avec <strong>Mon Coach</strong>
           </Typography>
           <img alt="register" src="/static/illustrations/junior_soccer.svg" />
         </SectionStyle>
@@ -67,7 +67,7 @@ export const Register = () => {
             </Typography>
           </Box>
 
-          <AuthSocial />
+          {/* <AuthSocial /> */}
 
           <RegisterForm />
 
@@ -76,11 +76,12 @@ export const Register = () => {
             align="center"
             sx={{ color: "text.secondary", mt: 3 }}
           >
-            En m'inscrivant, j'accepte les conditions Mon Coach suivantes&nbsp;
+            En m'inscrivant, j'accepte les conditions Mon Coach suivantes :
+            &nbsp;
             <Link underline="always" sx={{ color: "text.primary" }}>
               Conditions d'utilisation
             </Link>
-            &nbsp;and&nbsp;
+            &nbsp;et&nbsp;
             <Link underline="always" sx={{ color: "text.primary" }}>
               Politique de confidentialité
             </Link>

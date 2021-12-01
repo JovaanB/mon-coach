@@ -16,7 +16,7 @@ import { Scrollbar } from "../../components/Scrollbar";
 import { NavSection } from "../../components/NavSection";
 import { MHidden } from "../../components/@material-extend";
 import sidebarConfig from "./SidebarConfig";
-import account from "../../_mocks_/account";
+import AuthService from "../../services/auth.service";
 
 const DRAWER_WIDTH = 280;
 
@@ -37,6 +37,7 @@ const AccountStyle = styled("div")(({ theme }) => ({
 
 export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
   const { pathname } = useLocation();
+  const { firstname, lastname, roles } = AuthService.getCurrent();
 
   useEffect(() => {
     if (isOpenSidebar) {
@@ -65,13 +66,16 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
       <Box sx={{ mb: 5, mx: 2.5 }}>
         <Link underline="none" component={RouterLink} to="#">
           <AccountStyle>
-            <Avatar src={account.photoURL} alt="photoURL" />
+            <Avatar
+              src="/static/mock-images/avatars/avatar_default.svg"
+              alt="photoURL"
+            />
             <Box sx={{ ml: 2 }}>
               <Typography variant="subtitle2" sx={{ color: "text.primary" }}>
-                {account.displayName}
+                {firstname} {lastname}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {account.role}
+                {roles.map((role) => role.split("_")[1] + " ")}
               </Typography>
             </Box>
           </AccountStyle>
@@ -104,9 +108,6 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
             <Typography gutterBottom variant="h6">
               T'en veux plus?
             </Typography>
-            <Typography variant="body2" sx={{ color: "text.secondary" }}>
-              Seulement 9,99€/mois
-            </Typography>
           </Box>
 
           <Button
@@ -116,7 +117,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
             target="_blank"
             variant="contained"
           >
-            Passer à la version Pro
+            Passes à la version Pro
           </Button>
         </Stack>
       </Box>

@@ -5,17 +5,19 @@ import { useNavigate } from "react-router-dom";
 import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { PasswordOutlined, PasswordRounded } from "@mui/icons-material";
+import toaster from "react-hot-toast";
+import AuthService from "../../../services/auth.service";
 
 export const RegisterForm = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
 
   const RegisterSchema = Yup.object().shape({
-    firstName: Yup.string()
+    firstname: Yup.string()
       .min(2, "Trop court!")
       .max(50, "Trop Long!")
       .required("Prénom requis"),
-    lastName: Yup.string()
+    lastname: Yup.string()
       .min(2, "Trop court!")
       .max(50, "Trop Long!")
       .required("Nom requis"),
@@ -27,14 +29,30 @@ export const RegisterForm = () => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
+      firstname: "",
+      lastname: "",
       email: "",
       password: "",
     },
     validationSchema: RegisterSchema,
-    onSubmit: () => {
-      navigate("/dashboard/app", { replace: true });
+    onSubmit: (data) => {
+      const { email, firstname, lastname, password } = data;
+      AuthService.register({
+        email,
+        firstname,
+        lastname,
+        password,
+      }).then(
+        (response) => {
+          toaster.success(response.data.message);
+          navigate("/login", { replace: true });
+        },
+        (error) => {
+          toaster.error(
+            error.response.data.message || error.message || error.toString()
+          );
+        }
+      );
     },
   });
 
@@ -48,17 +66,17 @@ export const RegisterForm = () => {
             <TextField
               fullWidth
               label="Prénom"
-              {...getFieldProps("firstName")}
-              error={Boolean(touched.firstName && errors.firstName)}
-              helperText={touched.firstName && errors.firstName}
+              {...getFieldProps("firstname")}
+              error={Boolean(touched.firstname && errors.firstname)}
+              helperText={touched.firstname && errors.firstname}
             />
 
             <TextField
               fullWidth
               label="Nom"
-              {...getFieldProps("lastName")}
-              error={Boolean(touched.lastName && errors.lastName)}
-              helperText={touched.lastName && errors.lastName}
+              {...getFieldProps("lastname")}
+              error={Boolean(touched.lastname && errors.lastname)}
+              helperText={touched.lastname && errors.lastname}
             />
           </Stack>
 

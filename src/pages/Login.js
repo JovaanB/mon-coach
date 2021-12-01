@@ -36,7 +36,7 @@ export const Login = () => {
   return (
     <RootStyle title="Se connecter | Mon Coach">
       <AuthLayout>
-        Tu n'as pas de compte? &nbsp;
+        S'incrire en tant que <b>coach</b> &nbsp;
         <Link
           underline="none"
           variant="subtitle2"
@@ -66,13 +66,13 @@ export const Login = () => {
               Entres tes coordonnées ci-dessous.
             </Typography>
           </Stack>
-          <AuthSocial />
+          {/* <AuthSocial /> */}
 
           <LoginForm />
 
           <MHidden width="smUp">
             <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-              Tu n'as pas de compte?&nbsp;
+              S'incrire en tant que <b>coach</b> &nbsp;
               <Link variant="subtitle2" component={RouterLink} to="register">
                 C'est parti
               </Link>

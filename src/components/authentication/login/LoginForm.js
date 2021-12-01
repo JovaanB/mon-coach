@@ -13,10 +13,13 @@ import {
 } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { PasswordOutlined, PasswordRounded } from "@mui/icons-material";
+import toaster from "react-hot-toast";
+import AuthService from "../../../services/auth.service";
 
 export const LoginForm = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string()
@@ -32,13 +35,23 @@ export const LoginForm = () => {
       remember: true,
     },
     validationSchema: LoginSchema,
-    onSubmit: () => {
-      navigate("/dashboard/app", { replace: true });
+    onSubmit: (data) => {
+      const { email, password } = data;
+      setIsLoading(true);
+      AuthService.login({ email, password }).then(
+        () => {
+          toaster.success("Tu es connecté");
+          navigate("/dashboard/app", { replace: true });
+        },
+        (error) => {
+          toaster.error(error.response.data.message ?? error.message);
+        }
+      );
+      setIsLoading(false);
     },
   });
 
-  const { errors, touched, values, isSubmitting, handleSubmit, getFieldProps } =
-    formik;
+  const { errors, touched, values, handleSubmit, getFieldProps } = formik;
 
   const handleShowPassword = () => {
     setShowPassword((show) => !show);
@@ -104,7 +117,7 @@ export const LoginForm = () => {
           size="large"
           type="submit"
           variant="contained"
-          loading={isSubmitting}
+          loading={isLoading}
         >
           Se connecter
         </LoadingButton>
