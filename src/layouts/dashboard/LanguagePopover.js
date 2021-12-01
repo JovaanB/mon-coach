@@ -13,11 +13,13 @@ const LANGS = [
   {
     value: "fr",
     label: "Français",
+    isDisabled: false,
     icon: "/static/icons/ic_flag_fr.svg",
   },
   {
     value: "en",
-    label: "Anglais",
+    label: "Anglais (Bientôt)",
+    isDisabled: true,
     icon: "/static/icons/ic_flag_en.svg",
   },
 ];
@@ -63,6 +65,7 @@ export const LanguagePopover = () => {
         <Box sx={{ py: 1 }}>
           {LANGS.map((option) => (
             <MenuItem
+              disabled={option.isDisabled}
               key={option.value}
               selected={option.value === LANGS[0].value}
               onClick={handleClose}

@@ -2,21 +2,14 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import { Link as RouterLink, useLocation } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import {
-  Box,
-  Link,
-  Button,
-  Drawer,
-  Typography,
-  Avatar,
-  Stack,
-} from "@mui/material";
+import { Box, Link, Drawer, Typography, Avatar } from "@mui/material";
 import { Logo } from "../../components/Logo";
 import { Scrollbar } from "../../components/Scrollbar";
 import { NavSection } from "../../components/NavSection";
 import { MHidden } from "../../components/@material-extend";
 import sidebarConfig from "./SidebarConfig";
 import AuthService from "../../services/auth.service";
+import { InviteAthlete } from "../../components/InviteAthlete";
 
 const DRAWER_WIDTH = 280;
 
@@ -58,7 +51,12 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
       }}
     >
       <Box sx={{ px: 2.5, py: 3 }}>
-        <Box component={RouterLink} to="/" sx={{ display: "inline-flex" }}>
+        <Box
+          display="flex"
+          component={RouterLink}
+          to="/"
+          justifyContent="center"
+        >
           <Logo />
         </Box>
       </Box>
@@ -85,42 +83,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
       <NavSection navConfig={sidebarConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-
-      <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
-        <Stack
-          alignItems="center"
-          spacing={3}
-          sx={{
-            p: 2.5,
-            pt: 5,
-            borderRadius: 2,
-            position: "relative",
-            bgcolor: "grey.200",
-          }}
-        >
-          <Box
-            component="img"
-            src="/static/illustrations/profile_pic.svg"
-            sx={{ width: 100, position: "absolute", top: -50 }}
-          />
-
-          <Box sx={{ textAlign: "center" }}>
-            <Typography gutterBottom variant="h6">
-              T'en veux plus?
-            </Typography>
-          </Box>
-
-          <Button
-            style={{ textTransform: "inherit" }}
-            fullWidth
-            href="https://material-ui.com/store/items/minimal-dashboard/"
-            target="_blank"
-            variant="contained"
-          >
-            Passes à la version Pro
-          </Button>
-        </Stack>
-      </Box>
+      <InviteAthlete />
     </Scrollbar>
   );
 

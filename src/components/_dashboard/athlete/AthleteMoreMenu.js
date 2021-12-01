@@ -13,7 +13,7 @@ import {
   RestoreFromTrashOutlined,
 } from "@mui/icons-material";
 
-export const UserMoreMenu = () => {
+export const AthleteMoreMenu = () => {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 

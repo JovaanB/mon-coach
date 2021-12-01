@@ -9,7 +9,7 @@ import {
   TableSortLabel,
 } from "@mui/material";
 
-export const UserListHead = ({
+export const AthleteListHead = ({
   order,
   orderBy,
   rowCount,
@@ -58,7 +58,7 @@ export const UserListHead = ({
   );
 };
 
-UserListHead.propTypes = {
+AthleteListHead.propTypes = {
   order: PropTypes.oneOf(["asc", "desc"]),
   orderBy: PropTypes.string,
   rowCount: PropTypes.number,

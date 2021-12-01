@@ -35,7 +35,11 @@ const SearchStyle = styled(OutlinedInput)(({ theme }) => ({
   },
 }));
 
-export const UserListToolbar = ({ numSelected, filterName, onFilterName }) => {
+export const AthleteListToolbar = ({
+  numSelected,
+  filterName,
+  onFilterName,
+}) => {
   return (
     <RootStyle
       sx={{
@@ -79,7 +83,7 @@ export const UserListToolbar = ({ numSelected, filterName, onFilterName }) => {
   );
 };
 
-UserListToolbar.propTypes = {
+AthleteListToolbar.propTypes = {
   numSelected: PropTypes.number,
   filterName: PropTypes.string,
   onFilterName: PropTypes.func,

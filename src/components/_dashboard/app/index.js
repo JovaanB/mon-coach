@@ -4,7 +4,7 @@ export { AppCurrentSubject } from "./AppCurrentSubject";
 export { AppCurrentVisits } from "./AppCurrentVisits";
 export { AppItemOrders } from "./AppItemOrders";
 export { AppNewsUpdate } from "./AppNewsUpdate";
-export { AppNewUsers } from "./AppNewUsers";
+export { AppNewAthletes } from "./AppNewAthletes";
 export { AppOrderTimeline } from "./AppOrderTimeline";
 export { AppTasks } from "./AppTasks";
 export { AppTrafficBySite } from "./AppTrafficBySite";

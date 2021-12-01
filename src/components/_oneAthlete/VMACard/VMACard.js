@@ -12,13 +12,13 @@ import {
 } from "@mui/material";
 import { SpeedOutlined } from "@mui/icons-material";
 
-export const VMACard = ({ user }) => {
+export const VMACard = ({ athlete }) => {
   const [distance, setDistance] = useState(100);
   const [pourcent, setPourcent] = useState(60);
 
-  const calculChronoWithVMAAndPourcent = (user) => {
+  const calculChronoWithVMAAndPourcent = (athlete) => {
     const result =
-      (distance * 3600) / (((user.speedVMA * pourcent) / 100) * 1000);
+      (distance * 3600) / (((athlete.speedVMA * pourcent) / 100) * 1000);
     return result;
   };
 
@@ -55,7 +55,7 @@ export const VMACard = ({ user }) => {
       >
         <SpeedOutlined />{" "}
         <Chip
-          label={user?.speedVMA + " km/h"}
+          label={athlete?.speedVMA + " km/h"}
           color="success"
           variant="outlined"
         />
@@ -92,7 +92,7 @@ export const VMACard = ({ user }) => {
       </FormControl>
       <Typography variant="h6">
         Temps estimé :{" "}
-        {convertNumberToTime(calculChronoWithVMAAndPourcent(user))}
+        {convertNumberToTime(calculChronoWithVMAAndPourcent(athlete))}
       </Typography>
     </CustomCard>
   );

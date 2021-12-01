@@ -41,7 +41,7 @@ export const LoginForm = () => {
       AuthService.login({ email, password }).then(
         () => {
           toaster.success("Tu es connecté");
-          navigate("/dashboard/app", { replace: true });
+          navigate("/dashboard/planning", { replace: true });
         },
         (error) => {
           toaster.error(error.response.data.message ?? error.message);

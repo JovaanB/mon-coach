@@ -13,7 +13,7 @@ import {
   TextField,
 } from "@mui/material";
 
-export const MaximumLoadCard = ({ user }) => {
+export const MaximumLoadCard = () => {
   const [weight, setWeight] = useState(undefined);
   const [repetitions, setRepetitions] = useState(undefined);
 
@@ -23,7 +23,7 @@ export const MaximumLoadCard = ({ user }) => {
     if (repetitions < 10) {
       unRM = Math.round(weight / (1.03 - 0.03 * repetitions));
     }
-    if (repetitions == 10) {
+    if (repetitions === 10) {
       unRM = Math.round(weight / 0.75);
     }
     if (repetitions > 10) {

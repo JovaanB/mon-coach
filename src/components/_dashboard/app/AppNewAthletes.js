@@ -29,7 +29,7 @@ const IconWrapperStyle = styled("div")(({ theme }) => ({
 
 const TOTAL = 1352831;
 
-export const AppNewUsers = () => {
+export const AppNewAthletes = () => {
   return (
     <RootStyle>
       <IconWrapperStyle>
@@ -37,7 +37,7 @@ export const AppNewUsers = () => {
       </IconWrapperStyle>
       <Typography variant="h3">{fShortenNumber(TOTAL)}</Typography>
       <Typography variant="subtitle2" sx={{ opacity: 0.72 }}>
-        Nouveaux clients
+        Nouvel athléte
       </Typography>
     </RootStyle>
   );

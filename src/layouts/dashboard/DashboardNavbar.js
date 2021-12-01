@@ -5,7 +5,6 @@ import { MHidden } from "../../components/@material-extend";
 import { Searchbar } from "./Searchbar";
 import { AccountPopover } from "./AccountPopover";
 import { LanguagePopover } from "./LanguagePopover";
-import { NotificationsPopover } from "./NotificationsPopover";
 import { MenuOutlined } from "@mui/icons-material";
 
 const DRAWER_WIDTH = 280;
@@ -52,7 +51,6 @@ export const DashboardNavbar = ({ onOpenSidebar }) => {
           spacing={{ xs: 0.5, sm: 1.5 }}
         >
           <LanguagePopover />
-          <NotificationsPopover />
           <AccountPopover />
         </Stack>
       </ToolbarStyle>

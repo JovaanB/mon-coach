@@ -3,13 +3,12 @@ import { DashboardLayout } from "./layouts/dashboard";
 import { LogoOnlyLayout } from "./layouts/LogoOnlyLayout";
 import { Login } from "./pages/Login";
 import { Register } from "./pages/Register";
-import { DashboardApp } from "./pages/DashboardApp";
 import { Products } from "./pages/Products";
 import { Planning } from "./pages/Planning";
 import { Blog } from "./pages/Blog";
-import { User } from "./pages/User";
+import { Athlete } from "./pages/Athlete";
 import { NotFound } from "./pages/Page404";
-import { OneUser } from "./pages/OneUser";
+import { OneAthlete } from "./pages/OneAthlete";
 import ProtectedRoute from "./components/ProtectedRoute";
 import PublicRoute from "./components/PublicRoute";
 
@@ -23,11 +22,10 @@ export const Router = () => {
         </ProtectedRoute>
       ),
       children: [
-        { element: <Navigate to="/dashboard/app" replace /> },
-        { path: "app", element: <DashboardApp /> },
+        { element: <Navigate to="/dashboard/planning" replace /> },
         { path: "planning", element: <Planning /> },
-        { path: "user", element: <User /> },
-        { path: "user/:id", element: <OneUser /> },
+        { path: "athletes", element: <Athlete /> },
+        { path: "athlete/:id", element: <OneAthlete /> },
         { path: "products", element: <Products /> },
         { path: "blog", element: <Blog /> },
       ],
@@ -42,7 +40,7 @@ export const Router = () => {
       children: [
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
-        { path: "/", element: <Navigate to="/dashboard/app" /> },
+        { path: "/", element: <Navigate to="/dashboard/planning" /> },
       ],
     },
     {

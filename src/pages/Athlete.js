@@ -21,10 +21,10 @@ import { Label } from "../components/Label";
 import { Scrollbar } from "../components/Scrollbar";
 import { SearchNotFound } from "../components/SearchNotFound";
 import {
-  UserListHead,
-  UserListToolbar,
-  UserMoreMenu,
-} from "../components/_dashboard/user";
+  AthleteListHead,
+  AthleteListToolbar,
+  AthleteMoreMenu,
+} from "../components/_dashboard/athlete";
 
 import USERLIST from "../_mocks_/user";
 import { PlusOneOutlined } from "@mui/icons-material";
@@ -70,7 +70,7 @@ const applySortFilter = (array, comparator, query) => {
   return stabilizedThis.map((el) => el[0]);
 };
 
-export const User = () => {
+export const Athlete = () => {
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
   const [selected, setSelected] = useState([]);
@@ -136,7 +136,7 @@ export const User = () => {
   const isUserNotFound = filteredUsers.length === 0;
 
   return (
-    <Page title="Clients | Mon Coach">
+    <Page title="Athlètes | Mon Coach">
       <Container>
         <Stack
           direction="row"
@@ -145,7 +145,7 @@ export const User = () => {
           mb={5}
         >
           <Typography variant="h4" gutterBottom>
-            Clients
+            Athlètes
           </Typography>
           <Button
             variant="contained"
@@ -153,12 +153,12 @@ export const User = () => {
             to="#"
             startIcon={<PlusOneOutlined />}
           >
-            Nouveau client
+            Nouvel athlète
           </Button>
         </Stack>
 
         <Card>
-          <UserListToolbar
+          <AthleteListToolbar
             numSelected={selected.length}
             filterName={filterName}
             onFilterName={handleFilterByName}
@@ -167,7 +167,7 @@ export const User = () => {
           <Scrollbar>
             <TableContainer sx={{ minWidth: 800 }}>
               <Table>
-                <UserListHead
+                <AthleteListHead
                   order={order}
                   orderBy={orderBy}
                   headLabel={TABLE_HEAD}
@@ -195,7 +195,7 @@ export const User = () => {
                         <TableRow
                           hover
                           component={RouterLink}
-                          to={`/dashboard/user/${id}/`}
+                          to={`/dashboard/athlete/${id}/`}
                           key={id}
                           tabIndex={-1}
                           style={{ textDecoration: "none" }}
@@ -244,7 +244,7 @@ export const User = () => {
                           </TableCell>
 
                           <TableCell align="right">
-                            <UserMoreMenu />
+                            <AthleteMoreMenu />
                           </TableCell>
                         </TableRow>
                       );

@@ -32,8 +32,8 @@ import {
   Twitter,
 } from "@mui/icons-material";
 import { CustomCard } from "../components/CustomCard";
-import { VMACard } from "../components/_oneUser/VMACard/VMACard";
-import { MaximumLoadCard } from "../components/_oneUser/MaximumLoadCard/MaximumLoadCard";
+import { VMACard } from "../components/_oneAthlete/VMACard/VMACard";
+import { MaximumLoadCard } from "../components/_oneAthlete/MaximumLoadCard/MaximumLoadCard";
 
 const TabPanel = (props) => {
   const { children, value, index, ...other } = props;
@@ -51,8 +51,8 @@ const TabPanel = (props) => {
   );
 };
 
-export const OneUser = () => {
-  const [user, setUser] = useState({});
+export const OneAthlete = () => {
+  const [athlete, setAthlete] = useState({});
   const [isLoading, setIsLoading] = useState(true);
   const [value, setValue] = React.useState(0);
   const { id } = useParams();
@@ -62,8 +62,8 @@ export const OneUser = () => {
   };
 
   useEffect(() => {
-    const oneUser = USERLIST.find((user) => user.id === id);
-    setUser(oneUser);
+    const oneAthlete = USERLIST.find((athlete) => athlete.id === id);
+    setAthlete(oneAthlete);
     setIsLoading(false);
   }, [id]);
 
@@ -97,8 +97,8 @@ export const OneUser = () => {
     ];
   };
 
-  const calculMacros = (user) => {
-    const { age, weight, height, gender } = user;
+  const calculMacros = (athlete) => {
+    const { age, weight, height, gender } = athlete;
     let macro;
 
     if (gender === "male") {
@@ -111,16 +111,16 @@ export const OneUser = () => {
     return activityType(macro);
   };
 
-  const calculIMC = (user) => {
-    const { weight, height } = user;
+  const calculIMC = (athlete) => {
+    const { weight, height } = athlete;
     let result;
 
     result = weight / Math.pow(height / 100, 2);
     return Math.round(result);
   };
 
-  const calculIdealWeight = (user) => {
-    const { height, gender } = user;
+  const calculIdealWeight = (athlete) => {
+    const { height, gender } = athlete;
     let result;
 
     if (gender === "male") {
@@ -151,13 +151,13 @@ export const OneUser = () => {
                   alignItems="center"
                 >
                   <Avatar
-                    alt={user?.name}
-                    src={user?.avatarUrl}
+                    alt={athlete?.name}
+                    src={athlete?.avatarUrl}
                     sx={{ width: 56, height: 56, marginX: 3 }}
                   />
 
                   <Typography variant="h6">
-                    {user?.name} | {user?.age} ans
+                    {athlete?.name} | {athlete?.age} ans
                   </Typography>
                 </Box>
                 <Box
@@ -166,12 +166,12 @@ export const OneUser = () => {
                   gap={2}
                   marginBottom={2}
                 >
-                  <MonitorWeightOutlined /> <b>{user?.weight} KG</b>
-                  <HeightOutlined /> <b>{user?.height} CM</b>
+                  <MonitorWeightOutlined /> <b>{athlete?.weight} KG</b>
+                  <HeightOutlined /> <b>{athlete?.height} CM</b>
                 </Box>
                 <Alert severity="info">
-                  Son <b>IMC</b> est de <b>{calculIMC(user)}</b> | Poids idéal{" "}
-                  <b>{calculIdealWeight(user)}</b> KG
+                  Son <b>IMC</b> est de <b>{calculIMC(athlete)}</b> | Poids
+                  idéal <b>{calculIdealWeight(athlete)}</b> KG
                 </Alert>
                 <Typography variant="h5" marginY={2}>
                   Contact
@@ -183,7 +183,7 @@ export const OneUser = () => {
                   gap={2}
                   marginBottom={1}
                 >
-                  <EmailOutlined /> <span>{user?.email}</span>
+                  <EmailOutlined /> <span>{athlete?.email}</span>
                 </Box>
                 <Box
                   display="flex"
@@ -218,7 +218,11 @@ export const OneUser = () => {
                   marginBottom={2}
                 >
                   <TrackChangesOutlined />{" "}
-                  <Chip label={user?.goal} color="primary" variant="outlined" />
+                  <Chip
+                    label={athlete?.goal}
+                    color="primary"
+                    variant="outlined"
+                  />
                   | Extrêmement actif
                 </Box>
                 <Alert severity="success">
@@ -234,9 +238,9 @@ export const OneUser = () => {
                       </TableRow>
                     </TableHead>
                     <TableBody>
-                      {calculMacros(user).map((row) => (
+                      {calculMacros(athlete).map((row) => (
                         <TableRow
-                          selected={row.id === user.activityId}
+                          selected={row.id === athlete.activityId}
                           key={row.description}
                         >
                           <TableCell component="th" scope="row">
@@ -271,12 +275,12 @@ export const OneUser = () => {
             </Grid>
             <TabPanel value={value} index={0}>
               <Grid item>
-                <VMACard user={user} />
+                <VMACard athlete={athlete} />
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={1}>
               <Grid item>
-                <MaximumLoadCard user={user} />
+                <MaximumLoadCard athlete={athlete} />
               </Grid>
             </TabPanel>
             <TabPanel value={value} index={2}>
