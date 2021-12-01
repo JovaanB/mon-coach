@@ -10,12 +10,18 @@ import { Blog } from "./pages/Blog";
 import { User } from "./pages/User";
 import { NotFound } from "./pages/Page404";
 import { OneUser } from "./pages/OneUser";
+import ProtectedRoute from "./components/ProtectedRoute";
+import PublicRoute from "./components/PublicRoute";
 
 export const Router = () => {
   return useRoutes([
     {
       path: "/dashboard",
-      element: <DashboardLayout />,
+      element: (
+        <ProtectedRoute>
+          <DashboardLayout />
+        </ProtectedRoute>
+      ),
       children: [
         { element: <Navigate to="/dashboard/app" replace /> },
         { path: "app", element: <DashboardApp /> },
@@ -28,14 +34,21 @@ export const Router = () => {
     },
     {
       path: "/",
-      element: <LogoOnlyLayout />,
+      element: (
+        <PublicRoute>
+          <LogoOnlyLayout />
+        </PublicRoute>
+      ),
       children: [
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
-        { path: "404", element: <NotFound /> },
         { path: "/", element: <Navigate to="/dashboard/app" /> },
-        { path: "*", element: <Navigate to="/404" /> },
       ],
+    },
+    {
+      path: "/",
+      element: <LogoOnlyLayout />,
+      children: [{ path: "404", element: <NotFound /> }],
     },
     { path: "*", element: <Navigate to="/404" replace /> },
   ]);
