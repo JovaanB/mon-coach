@@ -1,5 +1,6 @@
 import { Container, Typography } from "@mui/material";
-import { Calendar } from "../components/Calendar";
+import CustomCalendar from "../components/Calendar";
+import moment from "moment";
 import Page from "../components/Page";
 
 export const Planning = () => {
@@ -10,7 +11,15 @@ export const Planning = () => {
           Planning
         </Typography>
 
-        <Calendar />
+        <CustomCalendar
+          events={[
+            {
+              start: moment().toDate(),
+              end: moment().add(1, "hours").toDate(),
+              title: "Coaching présentiel",
+            },
+          ]}
+        />
       </Container>
     </Page>
   );

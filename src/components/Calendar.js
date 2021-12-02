@@ -1,67 +1,27 @@
-import React from "react";
-import FullCalendar from "@fullcalendar/react";
-import dayGridPlugin from "@fullcalendar/daygrid";
-import timeGridPlugin from "@fullcalendar/timegrid";
-import interactionPlugin from "@fullcalendar/interaction";
-import frLocale from "@fullcalendar/core/locales/fr";
+import { Calendar, momentLocalizer } from "react-big-calendar";
+import moment from "moment";
+import "react-big-calendar/lib/css/react-big-calendar.css";
+import "moment/locale/fr";
+const localizer = momentLocalizer(moment);
 
-export const Calendar = () => {
-  const formatEvents = (props) => {
-    return props?.appointments?.map((appointment) => {
-      const { title, end, start } = appointment;
-
-      let startTime = new Date(start);
-      let endTime = new Date(end);
-
-      return {
-        title,
-        start: startTime,
-        end: endTime,
-        extendedProps: { ...appointment },
-      };
-    });
-  };
-
-  const handleEventClick = ({ event, openAppointment }) => {
-    openAppointment(event.extendedProps);
-  };
-
-  const handleEventDrop = (info, { updateAppointment }) => {
-    if (window.confirm("Are you sure you want to change the event date?")) {
-      console.log("change confirmed");
-
-      updateAppointment({
-        ...info.event.extendedProps,
-        start: info.event.start,
-        end: info.event.end,
-      });
-    } else {
-      console.log("change aborted");
-    }
-  };
-
-  return (
-    <FullCalendar
-      locales={[frLocale]}
-      locale="fr"
-      firstDay={1}
-      themeSystem="bootstrap"
-      nowIndicator
-      plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin]}
-      allDaySlot={false}
-      headerToolbar={{
-        left: "prev,next today",
-        center: "title",
-        right: "dayGridMonth,timeGridWeek,timeGridDay",
+const CustomCalendar = ({ events }) => (
+  <div>
+    <Calendar
+      localizer={localizer}
+      events={events}
+      startAccessor="start"
+      endAccessor="end"
+      messages={{
+        next: "Suivant",
+        previous: "Précédent",
+        today: "Aujourd'hui",
+        month: "Mois",
+        week: "Semaine",
+        day: "Jour",
       }}
-      initialView="dayGridMonth"
-      editable={true}
-      selectable={true}
-      selectMirror={true}
-      dayMaxEvents={true}
-      eventDrop={handleEventDrop}
-      eventClick={handleEventClick}
-      events={formatEvents}
+      style={{ height: "70vh" }}
     />
-  );
-};
+  </div>
+);
+
+export default CustomCalendar;
