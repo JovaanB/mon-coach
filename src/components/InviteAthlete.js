@@ -1,8 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { Box, Stack, Button } from "@mui/material";
 import { PersonAdd } from "@mui/icons-material";
+import { InviteAthleteDialog } from "./InviteAthleteDialog";
 
 export const InviteAthlete = () => {
+  const [isOpenDialog, setIsOpenDialog] = useState(false);
+
   return (
     <Box sx={{ px: 2.5, pb: 3, mt: 10 }}>
       <Stack
@@ -19,12 +22,16 @@ export const InviteAthlete = () => {
           style={{ textTransform: "inherit" }}
           fullWidth
           startIcon={<PersonAdd />}
-          href="https://material-ui.com/store/items/minimal-dashboard/"
-          target="_blank"
+          onClick={() => setIsOpenDialog(true)}
           variant="contained"
         >
           Inviter un athlète
         </Button>
+
+        <InviteAthleteDialog
+          isOpen={isOpenDialog}
+          handleClose={() => setIsOpenDialog(false)}
+        />
       </Stack>
     </Box>
   );
