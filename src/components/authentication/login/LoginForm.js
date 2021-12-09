@@ -44,7 +44,7 @@ export const LoginForm = () => {
           navigate("/dashboard/planning", { replace: true });
         },
         (error) => {
-          toaster.error(error.response.data.message ?? error.message);
+          toaster.error(error.response?.data.message ?? error.message);
         }
       );
       setIsLoading(false);

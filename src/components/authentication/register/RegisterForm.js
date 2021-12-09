@@ -1,16 +1,17 @@
 import * as Yup from "yup";
 import { useState } from "react";
 import { useFormik, Form, FormikProvider } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { Stack, TextField, IconButton, InputAdornment } from "@mui/material";
 import { LoadingButton } from "@mui/lab";
 import { PasswordOutlined, PasswordRounded } from "@mui/icons-material";
 import toaster from "react-hot-toast";
 import AuthService from "../../../services/auth.service";
 
-export const RegisterForm = () => {
+export const RegisterForm = ({ isAthlete }) => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [searchParams] = useSearchParams();
 
   const RegisterSchema = Yup.object().shape({
     firstname: Yup.string()
@@ -37,22 +38,42 @@ export const RegisterForm = () => {
     validationSchema: RegisterSchema,
     onSubmit: (data) => {
       const { email, firstname, lastname, password } = data;
-      AuthService.register({
-        email,
-        firstname,
-        lastname,
-        password,
-      }).then(
-        (response) => {
-          toaster.success(response.data.message);
-          navigate("/login", { replace: true });
-        },
-        (error) => {
-          toaster.error(
-            error.response.data.message || error.message || error.toString()
-          );
-        }
-      );
+
+      if (isAthlete) {
+        AuthService.join({
+          firstname,
+          lastname,
+          password,
+          token: searchParams.get("token"),
+        }).then(
+          (response) => {
+            toaster.success(response.data.message);
+            navigate("/login", { replace: true });
+          },
+          (error) => {
+            toaster.error(
+              error.response?.data.message || error.message || error.toString()
+            );
+          }
+        );
+      } else {
+        AuthService.register({
+          email,
+          firstname,
+          lastname,
+          password,
+        }).then(
+          (response) => {
+            toaster.success(response.data.message);
+            navigate("/login", { replace: true });
+          },
+          (error) => {
+            toaster.error(
+              error.response?.data.message || error.message || error.toString()
+            );
+          }
+        );
+      }
     },
   });
 
@@ -114,10 +135,10 @@ export const RegisterForm = () => {
 
           <LoadingButton
             fullWidth
+            loading={isSubmitting}
             size="large"
             type="submit"
             variant="contained"
-            loading={isSubmitting}
           >
             Créer un compte
           </LoadingButton>

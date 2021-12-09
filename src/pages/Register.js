@@ -1,10 +1,12 @@
-import { Link as RouterLink } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link as RouterLink, useSearchParams } from "react-router-dom";
 import { styled } from "@mui/material/styles";
-import { Box, Card, Link, Container, Typography } from "@mui/material";
+import { Box, Card, Link, Container, Typography, Alert } from "@mui/material";
 import { AuthLayout } from "../layouts/AuthLayout";
 import Page from "../components/Page";
 import { MHidden } from "../components/@material-extend";
 import { RegisterForm } from "../components/authentication/register";
+import AuthService from "../services/auth.service";
 
 const RootStyle = styled(Page)(({ theme }) => ({
   [theme.breakpoints.up("md")]: {
@@ -31,7 +33,29 @@ const ContentStyle = styled("div")(({ theme }) => ({
   padding: theme.spacing(12, 0),
 }));
 
-export const Register = () => {
+export const Register = ({ isAthlete }) => {
+  const [isVerify, setIsVerify] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
+  const [searchParams] = useSearchParams();
+
+  useEffect(() => {
+    if (isAthlete) {
+      AuthService.verify({
+        token: searchParams.get("token"),
+      }).then(
+        () => {
+          setIsVerify(true);
+        },
+        (error) => {
+          setIsVerify(false);
+          setErrorMessage(
+            error.response.data.message || error.message || error.toString()
+          );
+        }
+      );
+    }
+  }, []);
+
   return (
     <RootStyle title="Créer un compte | Mon Coach">
       <AuthLayout>
@@ -57,44 +81,57 @@ export const Register = () => {
 
       <Container>
         <ContentStyle>
-          <Box sx={{ mb: 5 }}>
-            <Typography variant="h4" gutterBottom>
-              Démarrer gratuitement
-            </Typography>
-            <Typography sx={{ color: "text.secondary" }}>
-              Gratuit pour toujours. Pas besoin de carte de crédit!
-            </Typography>
-          </Box>
+          {!isAthlete || (isAthlete && isVerify) ? (
+            <>
+              <Box sx={{ mb: 5 }}>
+                <Typography variant="h4" gutterBottom>
+                  Démarrer gratuitement
+                </Typography>
+                <Typography sx={{ color: "text.secondary" }}>
+                  Gratuit pour toujours. Pas besoin de carte de crédit!
+                </Typography>
+              </Box>
 
-          {/* <AuthSocial /> */}
+              {/* <AuthSocial /> */}
 
-          <RegisterForm />
+              <RegisterForm
+                isAthlete={isAthlete}
+                setIsVerify={setIsVerify}
+                setErrorMessage={setErrorMessage}
+              />
 
-          <Typography
-            variant="body2"
-            align="center"
-            sx={{ color: "text.secondary", mt: 3 }}
-          >
-            En m'inscrivant, j'accepte les conditions Mon Coach suivantes :
-            &nbsp;
-            <Link underline="always" sx={{ color: "text.primary" }}>
-              Conditions d'utilisation
-            </Link>
-            &nbsp;et&nbsp;
-            <Link underline="always" sx={{ color: "text.primary" }}>
-              Politique de confidentialité
-            </Link>
-            .
-          </Typography>
+              <Typography
+                variant="body2"
+                align="center"
+                sx={{ color: "text.secondary", mt: 3 }}
+              >
+                En m'inscrivant, j'accepte les conditions Mon Coach suivantes :
+                &nbsp;
+                <Link underline="always" sx={{ color: "text.primary" }}>
+                  Conditions d'utilisation
+                </Link>
+                &nbsp;et&nbsp;
+                <Link underline="always" sx={{ color: "text.primary" }}>
+                  Politique de confidentialité
+                </Link>
+                .
+              </Typography>
 
-          <MHidden width="smUp">
-            <Typography variant="subtitle2" sx={{ mt: 3, textAlign: "center" }}>
-              T'as déjà un compte?&nbsp;
-              <Link to="/login" component={RouterLink}>
-                Connectes toi
-              </Link>
-            </Typography>
-          </MHidden>
+              <MHidden width="smUp">
+                <Typography
+                  variant="subtitle2"
+                  sx={{ mt: 3, textAlign: "center" }}
+                >
+                  T'as déjà un compte?&nbsp;
+                  <Link to="/login" component={RouterLink}>
+                    Connectes toi
+                  </Link>
+                </Typography>
+              </MHidden>
+            </>
+          ) : (
+            <Alert severity="error">{errorMessage}</Alert>
+          )}
         </ContentStyle>
       </Container>
     </RootStyle>

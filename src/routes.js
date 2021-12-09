@@ -40,6 +40,7 @@ export const Router = () => {
       children: [
         { path: "login", element: <Login /> },
         { path: "register", element: <Register /> },
+        { path: "join", element: <Register isAthlete /> },
         { path: "/", element: <Navigate to="/dashboard/planning" /> },
       ],
     },

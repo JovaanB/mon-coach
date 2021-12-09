@@ -73,7 +73,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
                 {firstname} {lastname}
               </Typography>
               <Typography variant="body2" sx={{ color: "text.secondary" }}>
-                {roles.map((role) => role.split("_")[1] + " ")}
+                {roles.map((role) => role.split("_")[1] + " ")[0]}
               </Typography>
             </Box>
           </AccountStyle>
@@ -83,7 +83,7 @@ export const DashboardSidebar = ({ isOpenSidebar, onCloseSidebar }) => {
       <NavSection navConfig={sidebarConfig} />
 
       <Box sx={{ flexGrow: 1 }} />
-      <InviteAthlete />
+      {roles.includes("ROLE_COACH") && <InviteAthlete />}
     </Scrollbar>
   );
 
