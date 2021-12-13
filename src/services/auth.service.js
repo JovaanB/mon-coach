@@ -4,7 +4,7 @@ import authHeader from "../helpers/auth-header";
 const { REACT_APP_AUTH_URL } = process.env;
 
 const register = ({ email, firstname, lastname, roles, password }) => {
-  return axios.post(`${REACT_APP_AUTH_URL}signup`, {
+  return axios.post(`${REACT_APP_AUTH_URL}/signup`, {
     email,
     firstname,
     lastname,
@@ -15,7 +15,7 @@ const register = ({ email, firstname, lastname, roles, password }) => {
 
 const login = ({ email, password }) => {
   return axios
-    .post(`${REACT_APP_AUTH_URL}signin`, {
+    .post(`${REACT_APP_AUTH_URL}/signin`, {
       email,
       password,
     })
@@ -28,17 +28,18 @@ const login = ({ email, password }) => {
     });
 };
 
-const join = ({ firstname, lastname, password, token }) => {
-  return axios.post(`${REACT_APP_AUTH_URL}join?token=${token}`, {
+const join = ({ firstname, lastname, password, email, token }) => {
+  return axios.post(`${REACT_APP_AUTH_URL}/join?token=${token}`, {
     firstname,
     lastname,
     password,
+    email,
   });
 };
 
 const invite = ({ email, user }) => {
   return axios.post(
-    `${REACT_APP_AUTH_URL}invite`,
+    `${REACT_APP_AUTH_URL}/invite`,
     {
       email,
       user,
@@ -47,10 +48,8 @@ const invite = ({ email, user }) => {
   );
 };
 
-const verify = ({ token }) => {
-  return axios.post(`${REACT_APP_AUTH_URL}verify`, {
-    token,
-  });
+const getInvitation = ({ token }) => {
+  return axios.get(`${REACT_APP_AUTH_URL}/getInvitation?token=${token}`);
 };
 
 const logout = () => {
@@ -66,7 +65,7 @@ const toExports = {
   login,
   join,
   invite,
-  verify,
+  getInvitation,
   logout,
   getCurrent,
 };

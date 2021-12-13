@@ -40,16 +40,22 @@ export const Register = ({ isAthlete }) => {
 
   useEffect(() => {
     if (isAthlete) {
-      AuthService.verify({
+      AuthService.getInvitation({
         token: searchParams.get("token"),
       }).then(
-        () => {
-          setIsVerify(true);
+        (response) => {
+          console.log(response);
+          if (response.data.isVerify) {
+            setIsVerify(true);
+          } else {
+            setIsVerify(false);
+            setErrorMessage(response?.data.message);
+          }
         },
         (error) => {
           setIsVerify(false);
           setErrorMessage(
-            error.response.data.message || error.message || error.toString()
+            error.response?.data.message || error.message || error.toString()
           );
         }
       );

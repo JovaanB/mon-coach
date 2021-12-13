@@ -22,9 +22,11 @@ export const RegisterForm = ({ isAthlete }) => {
       .min(2, "Trop court!")
       .max(50, "Trop Long!")
       .required("Nom requis"),
-    email: Yup.string()
-      .email("L'email doit correspondre à une addresse mail valide")
-      .required("L'email est requis"),
+    email:
+      !isAthlete &&
+      Yup.string()
+        .email("L'email doit correspondre à une addresse mail valide")
+        .required("L'email est requis"),
     password: Yup.string().required("Le mot de passe est requis"),
   });
 
@@ -52,7 +54,9 @@ export const RegisterForm = ({ isAthlete }) => {
           },
           (error) => {
             toaster.error(
-              error.response?.data.message || error.message || error.toString()
+              error?.response?.data.message ||
+                error?.message ||
+                error.toString()
             );
           }
         );
@@ -77,7 +81,7 @@ export const RegisterForm = ({ isAthlete }) => {
     },
   });
 
-  const { errors, touched, handleSubmit, isSubmitting, getFieldProps } = formik;
+  const { errors, touched, handleSubmit, getFieldProps } = formik;
 
   return (
     <FormikProvider value={formik}>
@@ -104,6 +108,7 @@ export const RegisterForm = ({ isAthlete }) => {
           <TextField
             fullWidth
             autoComplete="email"
+            disabled={isAthlete}
             type="email"
             label="Email"
             {...getFieldProps("email")}
@@ -135,7 +140,6 @@ export const RegisterForm = ({ isAthlete }) => {
 
           <LoadingButton
             fullWidth
-            loading={isSubmitting}
             size="large"
             type="submit"
             variant="contained"
