@@ -17,17 +17,30 @@ export const Router = () => {
     {
       path: "/dashboard",
       element: (
-        <ProtectedRoute>
+        <ProtectedRoute
+          authorizedRoles={["ROLE_MASTER", "ROLE_ATHLETE", "ROLE_COACH"]}
+        >
           <DashboardLayout />
         </ProtectedRoute>
       ),
       children: [
         { element: <Navigate to="/dashboard/planning" replace /> },
         { path: "planning", element: <Planning /> },
-        { path: "athletes", element: <Athlete /> },
-        { path: "athlete/:id", element: <OneAthlete /> },
         { path: "products", element: <Products /> },
         { path: "blog", element: <Blog /> },
+      ],
+    },
+    {
+      path: "/dashboard",
+      element: (
+        <ProtectedRoute authorizedRoles={["ROLE_MASTER", "ROLE_COACH"]}>
+          <DashboardLayout />
+        </ProtectedRoute>
+      ),
+      children: [
+        { element: <Navigate to="/dashboard/planning" replace /> },
+        { path: "athletes", element: <Athlete /> },
+        { path: "athlete/:id", element: <OneAthlete /> },
       ],
     },
     {

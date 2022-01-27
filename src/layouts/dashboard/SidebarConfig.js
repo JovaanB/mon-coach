@@ -17,6 +17,7 @@ const sidebarConfig = [
     title: "athlètes",
     path: "/dashboard/athletes",
     icon: <PeopleOutlined />,
+    authorizedRoles: ["ROLE_MASTER", "ROLE_COACH"],
   },
   {
     title: "séances",

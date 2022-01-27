@@ -18,6 +18,8 @@ import {
   ArrowBackIosOutlined,
   ArrowForwardIosOutlined,
 } from "@mui/icons-material";
+import { supportsRole } from "../utils/functions";
+import authService from "../services/auth.service";
 
 const ListItemStyle = styled((props) => (
   <ListItemButton disableGutters {...props} />
@@ -162,9 +164,21 @@ export const NavSection = ({ navConfig, ...other }) => {
   return (
     <Box {...other}>
       <List disablePadding>
-        {navConfig.map((item) => (
-          <NavItem key={item.title} item={item} active={match} />
-        ))}
+        {navConfig.map((item) => {
+          const { authorizedRoles, forbiddenRoles } = item;
+
+          const isAuthorized = supportsRole({
+            authorizedRoles,
+            forbiddenRoles,
+            userRole: authService.getCurrent().roles[0],
+          });
+
+          return (
+            isAuthorized && (
+              <NavItem key={item.title} item={item} active={match} />
+            )
+          );
+        })}
       </List>
     </Box>
   );
