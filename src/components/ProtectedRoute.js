@@ -8,7 +8,7 @@ const ProtectedRoute = ({ children, authorizedRoles, forbiddenRoles }) => {
   const isAuthorized = supportsRole({
     authorizedRoles,
     forbiddenRoles,
-    userRole: isAuthenticated.roles[0],
+    userRole: isAuthenticated?.roles[0],
   });
 
   return isAuthenticated && isAuthorized ? children : <Navigate to="/login" />;
